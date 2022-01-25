@@ -15,21 +15,22 @@ function CreateTabs() {
       <Tab eventKey="home" title="Home">
         Hello!
       </Tab>
+      
       <Tab eventKey="profile" title="Profile">
-        Insert Cool Projects:
-
+        Insert pictures and link to podcast
       </Tab>
-      <Tab eventKey="not-profile" title="Not Profile">
-        Insert Bad Projects:
-
+      
+      <Tab eventKey="projects" title="Projects">
+        Insert Projects with descriptions:
       </Tab>
+      
       <Tab eventKey="contact" title="Contact">
-        Resume:
-
+        <div>Email:   echoalice0@gmail.com</div><br></br>
+        <div>Twitter:  <a href="https://twitter.com/echo__alice">https://twitter.com/echo__alice</a> </div><br></br>
+        <div>Github:  <a href="https://github.com/EchoAlice">https://github.com/EchoAlice</a></div>
       </Tab>
     </Tabs>
   );
 }
 
-// render(<CreateTabs />);
 export default CreateTabs;
