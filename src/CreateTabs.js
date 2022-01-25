@@ -1,15 +1,15 @@
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
-import {useState} from 'react';
+import { useState } from 'react';
 
-function CreateTabs() {
+const CreateTabs = () => {
   const [key, setKey] = useState('home');
 
   return (
     <Tabs
       id="controlled-tab-example"
       activeKey={key}
-      onSelect={(k) => setKey(k)}
+      onSelect={setKey}
       className="mb-3"
     >
       <Tab eventKey="home" title="Home">
@@ -25,9 +25,15 @@ function CreateTabs() {
       </Tab>
       
       <Tab eventKey="contact" title="Contact">
-        <div>Email:   echoalice0@gmail.com</div><br></br>
-        <div>Twitter:  <a href="https://twitter.com/echo__alice">https://twitter.com/echo__alice</a> </div><br></br>
-        <div>Github:  <a href="https://github.com/EchoAlice">https://github.com/EchoAlice</a></div>
+        <div>
+          Email:   echoalice0@gmail.com
+        </div><br></br>
+        <div>
+          Twitter:  <a href="https://twitter.com/echo__alice">https://twitter.com/echo__alice</a>
+        </div><br></br>
+        <div>
+          Github:  <a href="https://github.com/EchoAlice">https://github.com/EchoAlice</a>
+        </div>
       </Tab>
     </Tabs>
   );

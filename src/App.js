@@ -1,10 +1,9 @@
 import './App.css';
 import CreateTabs from "./CreateTabs.js"
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <h1>Echo's Portfolio Website </h1>
       <CreateTabs />
     </div>
   );
