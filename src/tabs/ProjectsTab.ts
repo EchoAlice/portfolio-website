@@ -1,11 +1,9 @@
 import React from 'react';
 
 const ProjectsTab = () => {
-  return(    
-    <div>
-      Insert Merkle Tree display of script
-    </div>
-  );
+  return (
+    // Insert merkle tree code here 
+    );
 }
 
 export default ProjectsTab;
