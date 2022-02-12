@@ -1,5 +1,5 @@
 import './App.scss';
-import CreateTabs from "./CreateTabs.jsx"
+import CreateTabs from "./CreateTabs.js"
 
 const App = () => {
   return (
