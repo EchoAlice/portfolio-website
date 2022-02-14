@@ -5,6 +5,7 @@ import ContactTab from './tabs/ContactTab';
 import HomeTab from './tabs/HomeTab';
 import ProfileTab from './tabs/ProfileTab';
 import ProjectsTab from './tabs/ProjectsTab';
+import SolutionView from './tabs/SolutionView';
 
 const CreateTabs = () => {
   const [key, setKey] = useState('home');
@@ -24,6 +25,9 @@ const CreateTabs = () => {
       </Tab>
       <Tab eventKey="projects" title="Projects">
         <ProjectsTab />
+      </Tab>
+      <Tab eventKey="solutionview" title="Solution View">
+        <SolutionView />
       </Tab>
       <Tab eventKey="contact" title="Contact">
         <ContactTab />
