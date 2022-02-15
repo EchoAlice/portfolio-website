@@ -5,7 +5,7 @@ import ContactTab from './tabs/ContactTab';
 import HomeTab from './tabs/HomeTab';
 import ProfileTab from './tabs/ProfileTab';
 import ProjectsTab from './tabs/ProjectsTab';
-import SolutionView from './tabs/SolutionView';
+import AdventOfCodeTab from './tabs/AdventOfCodeTab';
 
 const CreateTabs = () => {
   const [key, setKey] = useState('home');
@@ -26,8 +26,8 @@ const CreateTabs = () => {
       <Tab eventKey="projects" title="Projects">
         <ProjectsTab />
       </Tab>
-      <Tab eventKey="solutionview" title="Solution View">
-        <SolutionView />
+      <Tab eventKey="adventofcode" title="Advent of Code">
+        <AdventOfCodeTab />
       </Tab>
       <Tab eventKey="contact" title="Contact">
         <ContactTab />
