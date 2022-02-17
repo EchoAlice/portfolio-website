@@ -1,36 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SolutionView from './SolutionView';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-// Create a dropdown menu for the days completed
 
+/**
+ * Generates the dropdown items for the AOC dropdown menu.
+ * 
+ * @param {number} numberOfItems The number of items we want to display
+ * @param {Function} setDay Hooks set function.
+ */
+const dropdownItems = (numberOfItems, setDay) => {
+  const items = [];
+  for (let i = 0; i < numberOfItems; i++) {
+    const day = i + 1;
+    items.push(
+      <Dropdown.Item onClick={() => {
+        setDay(day);
+      }}>
+        Day {day}
+      </Dropdown.Item>
+    );
+  }
+  return items;
+};
 
-// Can arrow functions have props?
+/**
+ * View every single solution.
+ */
 const SolutionsView = () => {
-  const i = 2
-  const days_completed = [100, 200, 300]  
-  const answer_query = { day: i + 1, answer: days_completed[i]}
-
-  //  const [key, setKey] = useState('home');
+  const [day, setDay] = useState(1);
   
   return(    
-    // <SolutionView day={days_completed[i]}/>   
-    // Put the SoluitonView component within dropdown buttons 
    <>
       <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-        <Dropdown.Item href="#/action-1">Day 1</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Day 2</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Day 3</Dropdown.Item>
+        { dropdownItems(3, setDay) }
       </DropdownButton>
-    </>
-  );
-}
 
-/*
       <div>
-        <SolutionView parameters={answer_query} />
+        <SolutionView day={day} />
       </div>
-*/
-
-
+    </> 
+  );
+};
 
 export default SolutionsView;
