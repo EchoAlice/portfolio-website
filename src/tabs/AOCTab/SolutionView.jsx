@@ -7,22 +7,13 @@ import Day3Solution from './AnswerScripts/Day3Script';
 // This component should take in a string for file name.
 // Inserts string into function that reads in script to a tag
 
-
+// Can you explain this             v
 // const answer_query = { day: i - 1, file: file_name[i]}
-// Does it matter which way I do this? 
 
-// const leos_scripts = [
-//   Day1Solution,
-//   Day2Solution,
-//   Day3Solution,
-// ];
-
-// I want to keep solutions as python files for now.  I can learn 
-// how to convert them to JS after they've been set up and displayed properly
 const scripts = [
-  Day1Solution,
-  Day2Solution,
-  Day3Solution,
+  <Day1Solution />,
+  <Day2Solution />,
+  <Day3Solution />,
 ];
 
 // When specific button is clicked, pull up specific solution
