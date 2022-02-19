@@ -1,40 +1,30 @@
 import React, { useState, useEffect } from 'react';
-// import Day1Solution from './AnswerScripts/Day1Script';
-// import Day2Solution from './AnswerScripts/Day2Script';
-// import Day3Solution from './AnswerScripts/Day3Script';
+import day1text from './AnswerScripts/Day1Script.jsx.txt';
+import day2text from './AnswerScripts/Day2Script.jsx.txt';
+import day3text from './AnswerScripts/Day3Script.jsx.txt';
+import { CodeBlock, ocean } from "react-code-blocks";
 
-// When tab clicked, key of file gets inserted in as a prop
-// This component should take in a string for file name.
-// Inserts string into function that reads in script to a tag
-
-// Can you explain this             v
-// const answer_query = { day: i - 1, file: file_name[i]}
-
+// When button clicked, key of file gets inserted in as a prop
+// This component takes in prop.day, indexing which file to open and display.
+// Inserts file reference into function that reads in script to a tag
 
   const scripts = [
-    './day1script', 
-    './AnswerScripts/Day1Script', 
-    './AnswerScripts/Day3Script', 
+    day1text, 
+    day2text, 
+    day3text, 
   ];
-
-  // const scripts = [
-  //   <Day1Solution />,
-  //   <Day2Solution />,
-  //   <Day3Solution />,
-  // ];
- 
 
 // When specific button is clicked, pull up specific solution
 // Link array to components that display each solution
-const SolutionView = (props) => {
+  const SolutionView = ({ day }) => {
   
   // Declare state variable that will be the file
   const [file, setFile] = useState("");  
-  
-  const script = scripts[props.day -1]
-  console.log(script)
+  const script = scripts[day - 1]
   
   useEffect(() => {
+    console.log(day) 
+    console.log(script) 
     fetch( script )
       .then(r => r.text())
       .then(file => setFile(file))
@@ -43,20 +33,12 @@ const SolutionView = (props) => {
 
 // Insert string into function that reads in script to a tag
   return(    
-    <div>
-      <p> {file} </p>
-      {/* <p solution="file"> { file } </p> */}
-    </div>
+    <CodeBlock
+      text={file}
+      language={"javascript"}
+      theme={ocean}
+    />
   );
 };
 
 export default SolutionView;
-
-
-
-  // Went inside return
-
-
-    // <>
-    //  {file.map ( d => <div>{d}</div>)} 
-    // </>
