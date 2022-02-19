@@ -23,15 +23,11 @@ import { CodeBlock, ocean } from "react-code-blocks";
   const script = scripts[day - 1]
   
   useEffect(() => {
-    console.log(day) 
-    console.log(script) 
     fetch( script )
       .then(r => r.text())
       .then(file => setFile(file))
-      console.log({file})
   })
 
-// Insert string into function that reads in script to a tag
   return(    
     <CodeBlock
       text={file}
