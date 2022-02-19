@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Day1Solution from './AnswerScripts/Day1Script';
-import Day2Solution from './AnswerScripts/Day2Script';
-import Day3Solution from './AnswerScripts/Day3Script';
+// import Day1Solution from './AnswerScripts/Day1Script';
+// import Day2Solution from './AnswerScripts/Day2Script';
+// import Day3Solution from './AnswerScripts/Day3Script';
 
 // When tab clicked, key of file gets inserted in as a prop
 // This component should take in a string for file name.
@@ -10,11 +10,18 @@ import Day3Solution from './AnswerScripts/Day3Script';
 // Can you explain this             v
 // const answer_query = { day: i - 1, file: file_name[i]}
 
+
   const scripts = [
-    <Day1Solution />,
-    <Day2Solution />,
-    <Day3Solution />,
+    './day1script', 
+    './AnswerScripts/Day1Script', 
+    './AnswerScripts/Day3Script', 
   ];
+
+  // const scripts = [
+  //   <Day1Solution />,
+  //   <Day2Solution />,
+  //   <Day3Solution />,
+  // ];
  
 
 // When specific button is clicked, pull up specific solution
@@ -25,26 +32,31 @@ const SolutionView = (props) => {
   const [file, setFile] = useState("");  
   
   const script = scripts[props.day -1]
+  console.log(script)
+  
   useEffect(() => {
     fetch( script )
       .then(r => r.text())
-      // Problem happens here!!!!!!
-      // "File is declared but its value is never read"
-      .then(file => setFile()) 
+      .then(file => setFile(file))
+      console.log({file})
   })
 
 // Insert string into function that reads in script to a tag
   return(    
-    <p>
-       { file }
-    </p>
+    <div>
+      <p> {file} </p>
+      {/* <p solution="file"> { file } </p> */}
+    </div>
   );
 };
 
 export default SolutionView;
 
+
+
   // Went inside return
-      // {/* <p>Day: { props.day }</p> */}
-      // <p>{ scripts[props.day - 1]} </p>
-      // {/* Figure out how to display script from the file */}
-      // <script>open({ scripts[props.day - 1] })</script>
+
+
+    // <>
+    //  {file.map ( d => <div>{d}</div>)} 
+    // </>
