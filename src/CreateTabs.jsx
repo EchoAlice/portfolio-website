@@ -4,7 +4,7 @@ import Tab from 'react-bootstrap/Tab'
 import ContactTab from './tabs/ContactTab';
 import HomeTab from './tabs/HomeTab';
 import ProfileTab from './tabs/ProfileTab';
-import ProjectsTab from './tabs/ProjectsTab';
+import ProjectsTab from './tabs/ProjectsTab/MerkleDisplay';
 import AdventOfCodeTab from './tabs/AOCTab/AdventOfCodeTab';
 
 const CreateTabs = () => {
