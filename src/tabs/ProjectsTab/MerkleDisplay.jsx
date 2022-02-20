@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import merkle from './MerkleTree.py.txt'
+import merkle from './MerkleTree.py'
 import { CodeBlock, ocean } from "react-code-blocks";
 
 const ProjectsTab = () => {
