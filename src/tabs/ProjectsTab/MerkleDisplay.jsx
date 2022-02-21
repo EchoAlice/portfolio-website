@@ -15,7 +15,7 @@ const ProjectsTab = () => {
   return(    
     <CodeBlock
       text={file}
-      language={"javascript"}
+      language="javascript"
       theme={ocean} 
     />
   );
