@@ -1,9 +1,11 @@
 const Day3Solution = (input) => {
-  // JavaScript goes here
-  // Fetch the file
-  // Parse the file
-  const answer ="Day 3 answer goes here" + input
+  //const answer ="Day 1 answer goes here" + input
   
+  // Parses file, separating string into individual values
+  const values = input.split("\r\n");
+  console.log(values)
+  
+  const answer = values[0];
   return( 
     answer
   )

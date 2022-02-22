@@ -80,9 +80,11 @@ return(
     />
 
     {/* Passes in the input file into the javascript file  */}
-    <div>
-      answer={ solutions[index](input_file) }
-    </div> 
+    <CodeBlock
+      text= {"Answer: " + solutions[index](input_file)}  
+      language="javascript"
+      theme={ocean}
+    />
   </>
   );
 };
