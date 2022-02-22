@@ -3,7 +3,7 @@ import React from 'react';
 const Day1Solution = () => {
   
   return( 
-      <p>Day 1 Solution goes here</p>
+    Day 1 answer goes here
   )
 }
 
