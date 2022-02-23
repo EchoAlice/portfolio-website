@@ -1,13 +1,9 @@
 const Day2Solution = (input) => {
-  //const answer ="Day 1 answer goes here" + input
   
-  // Parses file, separating string into individual values
-  const values = input.split("\r\n");
-  console.log(values)
+  const answer = "Day 2 solution goes here" 
   
-  const answer = values[0];
   return( 
-    answer
+    answer 
   )
 }
 
