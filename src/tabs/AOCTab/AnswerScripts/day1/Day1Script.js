@@ -1,4 +1,4 @@
-function Day1Solution(input) {
+const Day1Solution = (input) => {
 
   const answer = "Day 1 answer goes here";
 
