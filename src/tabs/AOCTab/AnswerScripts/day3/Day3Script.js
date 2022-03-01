@@ -17,7 +17,8 @@ const Day3Solution = (input) => {
     let count_0 = 0;
     let count_1 = 0;
     /**
-     * Calculates the number of times first bit of each number is present */ 
+     * Calculates the number of times first bit of each number is present 
+     */ 
     for (let r = 0; r < height; r++) {
       parseInt(binary_input[r][c]) === 0 ? count_0 += 1 : count_1 += 1;
       parseInt(binary_input[r][c]) === 1 ? count_1 += 1 : count_0 += 1;

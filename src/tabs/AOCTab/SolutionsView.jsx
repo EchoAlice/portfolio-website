@@ -32,7 +32,7 @@ const SolutionsView = () => {
   return(    
    <>
       <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-        { dropdownItems(3, setDay) }
+        { dropdownItems(4, setDay) }
       </DropdownButton>
 
       <div>

@@ -4,12 +4,15 @@ import React, { useState, useEffect } from 'react';
 import day1text from './AnswerScripts/day1/Day1Script.txt';
 import day2text from './AnswerScripts/day2/Day2Script.txt';
 import day3text from './AnswerScripts/day3/Day3Script.txt';
+import day4text from './AnswerScripts/day4/Day4Script.txt';
 import day1input from './AnswerScripts/day1/input_test.txt';
 import day2input from './AnswerScripts/day2/input_test.txt';
 import day3input from './AnswerScripts/day3/input_test.txt';
+import day4input from './AnswerScripts/day4/input_test.txt';
 import day1solution from './AnswerScripts/day1/Day1Script.js';
 import day2solution from './AnswerScripts/day2/Day2Script.js';
 import day3solution from './AnswerScripts/day3/Day3Script.js';
+import day4solution from './AnswerScripts/day4/Day4Script.js';
 import { CodeBlock, ocean } from "react-code-blocks";
 
 /**
@@ -21,17 +24,19 @@ import { CodeBlock, ocean } from "react-code-blocks";
 const txt_scripts = [
   day1text, 
   day2text, 
-  day3text 
+  day3text,
+  day4text 
 ];
 
 const inputs = [
   day1input,
   day2input,
-  day3input
+  day3input,
+  day4input
 ]
 
 /** Declares array of functions */
-let solutions = [day1solution, day2solution, day3solution]
+let solutions = [day1solution, day2solution, day3solution, day4solution]
 
 /**
  * When specific button is clicked, pull up specific solution

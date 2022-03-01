@@ -1,0 +1,10 @@
+const Day4Solution = (input) => {
+
+  const answer = "Day 4 answer goes here";
+
+  return (
+    answer
+  );
+}
+
+export default Day4Solution;
