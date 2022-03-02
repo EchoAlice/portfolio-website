@@ -4,8 +4,7 @@ import Tab from 'react-bootstrap/Tab'
 import ContactTab from './tabs/ContactTab';
 import HomeTab from './tabs/HomeTab';
 import ProfileTab from './tabs/ProfileTab';
-import ProjectsTab from './tabs/ProjectsTab/MerkleDisplay';
-import AdventOfCodeTab from './tabs/AOCTab/AdventOfCodeTab';
+import ProjectsTab from './tabs/ProjectsTab';
 
 const CreateTabs = () => {
   const [key, setKey] = useState('home');
@@ -25,9 +24,6 @@ const CreateTabs = () => {
       </Tab>
       <Tab eventKey="projects" title="Projects">
         <ProjectsTab />
-      </Tab>
-      <Tab eventKey="adventofcode" title="Advent of Code">
-        <AdventOfCodeTab />
       </Tab>
       <Tab eventKey="contact" title="Contact">
         <ContactTab />
