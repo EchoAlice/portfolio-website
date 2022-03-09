@@ -1,46 +1,44 @@
-import React, { useState, useEffect } from 'react';
-
-/** Import dynamically to reduce the nonsense that is occuring */
-import day1text from './AnswerScripts/day1/Day1Script.txt';
-import day2text from './AnswerScripts/day2/Day2Script.txt';
-import day3text from './AnswerScripts/day3/Day3Script.txt';
-import day4text from './AnswerScripts/day4/Day4Script.txt';
-import day1input from './AnswerScripts/day1/input_test.txt';
-import day2input from './AnswerScripts/day2/input_test.txt';
-import day3input from './AnswerScripts/day3/input_test.txt';
-import day4input from './AnswerScripts/day4/input.txt';
-import day1solution from './AnswerScripts/day1/Day1Script.js';
-import day2solution from './AnswerScripts/day2/Day2Script.js';
-import day3solution from './AnswerScripts/day3/Day3Script.js';
-import day4solution from './AnswerScripts/day4/Day4Script.js';
+// import React, { useState, useEffect } from 'react';
 import { CodeBlock, ocean } from "react-code-blocks";
+const fs = require('fs');
+
+// Creates a string of imports
+// I need to figure out how to convert the .js file to a string!
+// Should I create all of the strings for the scripts at the same time? 
+// Or only create the string when the day is called?
+
+const solutions = [];
+const scripts = [];
+let numberOfDays = 4;
+for (let i = 1; i <= numberOfDays; i++) {
+  solutions[i] = require("./AnswerScripts/day"+i+"/Day"+i+"Script.js");
+  // Converts .js file to a string
+  scripts[i] = fs.readFile(solutions[i]).toString()
+  console.log(solutions[i]);
+  console.log(scripts[i]);
+}
+
+
+/**
+ * Converts .js file to a string
+ */
+// const convert = (script) => {
+  
+// };
 
 /**
  * When button clicked, key of file gets inserted in as a prop
  * This component takes in prop.day, indexing which file to open and display.
  * Inserts file reference into function that reads in script to a tag
- */
-
-const txt_scripts = [
-  day1text, 
-  day2text, 
-  day3text,
-  day4text 
-];
-
-
-/** Declares array of functions */
-let solutions = [day1solution, day2solution, day3solution, day4solution]
-
-/**
+ *
+ *
  * When specific button is clicked, pull up specific solution
  * Link array to components that display each solution
  */
 const SolutionView = ({ day }) => {
 
 /** Declare hooks */ 
-const [script_file, setScriptFile] = useState("");  
-const [input_file, setInputFile] = useState("");  
+// const [script_file, setScriptFile] = useState("");  
 
 /** Declare state variables that will be the files imported */ 
 const index = [day - 1]
@@ -56,6 +54,21 @@ const index = [day - 1]
 //     .then(r => r.text())
 //     .then(script_file => setScriptFile(script_file))
 //   })
+
+
+/**
+ * Turns a js file into a string so i don't have
+ * to create twice as many files to display and execute code 
+ */
+
+// How do I put file into this funciton when specific hook is used
+// Do I need to pass the text file into a string? or js file?
+
+// var fs = require("fs");
+// fs.readFile(solutions[index], function(text){
+//     var text_string = text.split("\n")
+// });
+
 
 /**
  * Bug here. I think the page doesn't render at all if I have this conditional
@@ -76,7 +89,7 @@ return(
 
     {/* Passes in the input file into the javascript file  */}
     <CodeBlock
-      text= {"Answer: " + solutions[index]}  
+      text= {"Answer: " + solutions[index]()}  
       language="javascript"
       theme={ocean}
     />
