@@ -1,6 +1,8 @@
-const Day3Solution = (input) => {
+import day3input from './input_test.txt';
+
+const Day3Solution = () => {
   // Parses file, separating string into individual values
-  const binary_input = input.split("\r\n");
+  const binary_input = day3input.split("\r\n");
   
   // Lengths of binary digits and array
   const width = binary_input[0].length; 

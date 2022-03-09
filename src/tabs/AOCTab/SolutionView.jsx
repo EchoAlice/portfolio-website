@@ -28,12 +28,6 @@ const txt_scripts = [
   day4text 
 ];
 
-const inputs = [
-  day1input,
-  day2input,
-  day3input,
-  day4input
-]
 
 /** Declares array of functions */
 let solutions = [day1solution, day2solution, day3solution, day4solution]
@@ -50,23 +44,18 @@ const [input_file, setInputFile] = useState("");
 
 /** Declare state variables that will be the files imported */ 
 const index = [day - 1]
-const txt_script = txt_scripts[index]
-const input = inputs[index]
+// const txt_script = scripts[index];
 
 /** 
  * Fetches the script display that user wants to see
  * Should I fetch the input.txt file in the same useEffect?
  * Then pass that in as a parameter to Day_Script.js
  */ 
-useEffect(() => {
-  fetch( txt_script )
-    .then(r => r.text())
-    .then(script_file => setScriptFile(script_file))
-
-  fetch( input )
-    .then(s => s.text())
-    .then(input_file => setInputFile(input_file))
-  })
+// useEffect(() => {
+//   fetch( txt_script )
+//     .then(r => r.text())
+//     .then(script_file => setScriptFile(script_file))
+//   })
 
 /**
  * Bug here. I think the page doesn't render at all if I have this conditional
@@ -79,14 +68,15 @@ return(
   <>
     {/* Displays the script  */}
     <CodeBlock
-      text={script_file}
+      // text={script_file}
+      text={scripts[index]}
       language="javascript"
       theme={ocean}
     />
 
     {/* Passes in the input file into the javascript file  */}
     <CodeBlock
-      text= {"Answer: " + solutions[index](input_file)}  
+      text= {"Answer: " + solutions[index]}  
       language="javascript"
       theme={ocean}
     />

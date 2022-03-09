@@ -1,4 +1,6 @@
-const Day1Solution = (input) => {
+//import day1input from './AnswerScripts/day1/input_test.txt';
+
+const Day1Solution = () => {
 
   const answer = "Day 1 answer goes here";
 
