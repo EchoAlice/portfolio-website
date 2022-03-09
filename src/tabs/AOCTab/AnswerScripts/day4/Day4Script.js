@@ -1,6 +1,8 @@
-const createBoard = (input) => {
+import day4input from './input.txt';
+
+const createBoard = () => {
   let board = []; 
-  let board_rows = input.split("\r\n");
+  let board_rows = day4input.split("\r\n");
   
   // Creates an array of arrays!
   for (let r = 0; r < 5; r++){
