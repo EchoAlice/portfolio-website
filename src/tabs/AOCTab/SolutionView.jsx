@@ -1,24 +1,30 @@
-import Day1Solution from "./days/day1/Day1Script.js";
-import Day2Solution from "./days/day2/Day2Script.js";
-import Day3Solution from "./days/day3/Day3Script.js";
-import Day4Solution from "./days/day4/Day4Script.js";
+import React, { Suspense } from "react";
+import {ErrorBoundary} from 'react-error-boundary';
+// import { CodeBlock, ocean } from "react-code-blocks";
 
-const solutions = [];
-solutions[1] = <Day1Solution />
-solutions[2] = <Day2Solution />
-solutions[3] = <Day3Solution />
-solutions[4] = <Day4Solution />
+/*
+ *Dynamcally imports modules based on state
+ */
 
-// How do i get the day 1 component to show up on site?
+ function loadComponent(day) {
+  const Component = React.lazy(() =>
+    import("./days/day"+day+"/Day"+day+"Script.js")
+  );
+  return Component;
+}
 
-const SolutionView =(props) => {
+const SolutionView = (props) => {
   const day = props.parameter;
-  const answer = solutions[day]
+  const Component = loadComponent(day); 
   
   return(
-    <>
-      { answer }
-    </> 
+    <div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <ErrorBoundary>
+          <Component />
+        </ErrorBoundary>
+      </Suspense>
+    </div>
   );
 }
 
@@ -28,18 +34,21 @@ export default SolutionView;
 
 
 
-// import { CodeBlock, ocean } from "react-code-blocks";
-// const fs = require('fs');
 
-// // Use a loop that gets all .js files
+
+// Use a loop that gets all .js files
 // let numberOfDays = 4;
 // const solutions = [];
 // const scripts = [];
 
 // for (let i = 1; i <= numberOfDays; i++) {
-//  solutions[i] = require("./AnswerScripts/day"+i+"/Day"+i+"Script.js");
-//   // Converts .js file to a string
-//   scripts[i] = fs.readFile(solutions[i]).toString()
+//   solutions[i] = require("./days/day"+i+"/Day"+i+"Script.js");
+//   import(solutions[i])
 //   console.log(solutions[i]);
+  
+//   Converts .js file to a string
+//   scripts[i] = fs.readFile(solutions[i]).toString()
 //   console.log(scripts[i]); 
 // }
+
+

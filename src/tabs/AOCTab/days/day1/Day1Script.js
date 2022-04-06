@@ -1,4 +1,4 @@
-import input from "./input.txt"
+// import input from "./input.txt"
 
 const Day1Solution = (input) => {
   

@@ -3,9 +3,8 @@ import SolutionView from './SolutionView';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 
 /*
- * This function is pretty dang complex...
- * Does the variable day in the for loop need to
- * be called something else?
+ * This function dynamically creates dropdown items based
+ * on the number of days completed
  */
 
 const dropdownItems = (numberOfItems, setDay) => {
@@ -25,12 +24,10 @@ const dropdownItems = (numberOfItems, setDay) => {
  */
 
 const SolutionsView = () => {
-  const [day, setDay] = useState("");
+  const [day, setDay] = useState(1);
   var numberOfDays = 4;
-  // Do I need to return <SolutionView /> that passes in the day that is clicked?
   
   return( 
-    // Idk if setDay should be here. I have it in each dropdown item
     <>
       <DropdownButton id="dropdown-basic-button" title="Dropdown button">
         { dropdownItems(numberOfDays, setDay) }
