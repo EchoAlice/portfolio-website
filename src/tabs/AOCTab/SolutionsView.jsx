@@ -24,6 +24,9 @@ const dropdownItems = (numberOfItems, setDay) => {
  */
 
 const SolutionsView = () => {
+  // When useState starts as useState("") error is thrown
+  // because there is no file named "days/day/DayScript.js"
+  // Is this a problem?
   const [day, setDay] = useState(1);
   var numberOfDays = 4;
   

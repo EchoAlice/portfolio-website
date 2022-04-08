@@ -1,10 +1,12 @@
-// import input from "./input.txt"
-
-const Day1Solution = (input) => {
+const Day1Solution = (props) => {
+  const input = props.input
+  console.log("Day1 input: " + input); 
+ 
+  const answer = "Day 1 answer";
   
   return(
-    <div>
-      Day 1 Answer
+    <div> 
+      {answer}
     </div>
   );
 }

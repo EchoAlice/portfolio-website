@@ -1,7 +1,11 @@
-const Day2Solution = (input) => {
+const Day2Solution = (props) => {
+  const input = props.input
+  console.log("Day 2 input: " + input); 
+  
+  const answer = "Day 2 answer";
   return(
     <div>
-      Day 2 Answer
+      {answer}
     </div>
   );
 }

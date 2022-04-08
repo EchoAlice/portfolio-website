@@ -1,9 +1,10 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import {ErrorBoundary} from 'react-error-boundary';
+import day1input from "./days/day1/input.txt";
 // import { CodeBlock, ocean } from "react-code-blocks";
 
 /*
- *Dynamcally imports modules based on state
+ *Dynamcally imports Component based on state
  */
 
  function loadComponent(day) {
@@ -13,18 +14,29 @@ import {ErrorBoundary} from 'react-error-boundary';
   return Component;
 }
 
+// How do i dynamically import input to pass into component?
 const SolutionView = (props) => {
+  const [input, setInput] = useState("");
   const day = props.parameter;
   const Component = loadComponent(day); 
-  
+ 
+  useEffect(() => { 
+    fetch(day1input)
+      .then(r => r.text())
+      .then(input => setInput(input))
+  })
+
+  // How do I use CodeBlock now that we have these new tags?
   return(
-    <div>
+    <>
       <Suspense fallback={<div>Loading...</div>}>
         <ErrorBoundary>
-          <Component />
+          
+          <Component input={input}/>
+        
         </ErrorBoundary>
       </Suspense>
-    </div>
+    </>
   );
 }
 
@@ -34,21 +46,5 @@ export default SolutionView;
 
 
 
-
-
-// Use a loop that gets all .js files
-// let numberOfDays = 4;
-// const solutions = [];
-// const scripts = [];
-
-// for (let i = 1; i <= numberOfDays; i++) {
-//   solutions[i] = require("./days/day"+i+"/Day"+i+"Script.js");
-//   import(solutions[i])
-//   console.log(solutions[i]);
-  
-//   Converts .js file to a string
-//   scripts[i] = fs.readFile(solutions[i]).toString()
-//   console.log(scripts[i]); 
-// }
 
 

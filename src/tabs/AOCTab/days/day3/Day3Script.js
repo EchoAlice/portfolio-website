@@ -1,7 +1,12 @@
-const Day3Solution = (input) => {
+const Day3Solution = (props) => {
+  const input = props.input
+  console.log("Day 3 input: " + input); 
+  
+  const answer = "Day 3 answer";
+
   return(
     <div>
-      Day 3 Answer
+      {answer}
     </div>
   );
 }
