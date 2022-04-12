@@ -24,16 +24,11 @@ const scripts = [
   day4script
 ]
 
-/*
- * Dynamcally imports Component based on state.  Figure out how to
- *    do this with input.txt and script.txt files
- */
-
- function loadComponent(day) {
-  const Component = React.lazy(() =>
-    import("./days/day"+day+"/Day"+day+"Script.js")
+ function loadAnswer(day) {
+  const Answer = React.lazy(() =>
+    import("./days/day"+day+"/Day"+day+"Solution.js")
   );
-  return Component;
+  return Answer;
 }
 
 const SolutionView = (props) => {
@@ -41,7 +36,7 @@ const SolutionView = (props) => {
   const [script, setScript] = useState("");
   const day = props.parameter;
   const index = day - 1;
-  const Component = loadComponent(day); 
+  const Answer = loadAnswer(day);
 
   useEffect(() => { 
     fetch(inputs[index])
@@ -59,17 +54,15 @@ const SolutionView = (props) => {
     <>
       <Suspense fallback={<div>Loading...</div>}>
         <ErrorBoundary>
-          
           {/* Displays script */}
           <CodeBlock
             text={script}
             language="javascript"
             theme={ocean}
-          /> 
-          
+          />
+
           {/* Displays answer */}
-          <Component input={input}/>
-        
+          <Answer input={input}/>
         </ErrorBoundary>
       </Suspense>
     </>
