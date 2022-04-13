@@ -1,5 +1,4 @@
 import React, { Suspense, useEffect, useState } from "react";
-import {ErrorBoundary} from 'react-error-boundary';
 import day1input from "./days/day1/input.txt";
 import day2input from "./days/day2/input.txt";
 import day3input from "./days/day3/input.txt";
@@ -24,9 +23,9 @@ const scripts = [
   day4script
 ]
 
- function loadAnswer(day) {
+function loadAnswer(day) {
   const Answer = React.lazy(() =>
-    import("./days/day"+day+"/Day"+day+"Solution.js")
+    import(`./days/day${day}/Day${day}Solution.js`)
   );
   return Answer;
 }
@@ -49,21 +48,15 @@ const SolutionView = (props) => {
       console.log(script)
   })
 
-  // How do I use CodeBlock now that we have these new tags?
   return(
     <>
       <Suspense fallback={<div>Loading...</div>}>
-        <ErrorBoundary>
-          {/* Displays script */}
-          <CodeBlock
-            text={script}
-            language="javascript"
-            theme={ocean}
-          />
-
-          {/* Displays answer */}
-          <Answer input={input}/>
-        </ErrorBoundary>
+        <CodeBlock
+          text={script}
+          language="javascript"
+          theme={ocean}
+        />
+        <Answer input={input}/>
       </Suspense>
     </>
   );

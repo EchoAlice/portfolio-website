@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import SolutionView from './SolutionView';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 
+const NUMBER_OF_DAYS = 4;
+
 /*
  * This function dynamically creates dropdown items based
  * on the number of days completed
  */
-
 const dropdownItems = (numberOfItems, setDay) => {
   const items = [];
   for (let day = 1; day <= numberOfItems; day++) {
@@ -21,22 +22,17 @@ const dropdownItems = (numberOfItems, setDay) => {
 
 /*
  * Creates a dropdown menu for the days completed
+ * Pass in the 'day' parameter to the solutionView tag
  */
-
 const SolutionsView = () => {
-  // When useState starts as useState("") error is thrown
-  // because there is no file named "days/day/DayScript.js"
-  // Is this a problem?
   const [day, setDay] = useState(1);
-  var numberOfDays = 4;
   
   return( 
     <>
       <DropdownButton id="dropdown-basic-button" title="Dropdown button">
-        { dropdownItems(numberOfDays, setDay) }
+        { dropdownItems(NUMBER_OF_DAYS, setDay) }
       </DropdownButton>      
       
-      {/* Pass in the day to the solutionView tag */}
       <SolutionView parameter={ day } />
     </>
   );
