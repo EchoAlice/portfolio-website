@@ -28,7 +28,7 @@ const SolutionsView = () => {
   // because there is no file named "days/day/DayScript.js"
   // Is this a problem?
   const [day, setDay] = useState(1);
-  var numberOfDays = 4;
+  var numberOfDays = 5;
   
   return( 
     <>

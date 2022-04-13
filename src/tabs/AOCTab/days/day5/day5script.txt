@@ -1,0 +1,11 @@
+const Day5Solution = (props) => {
+  const input = props.input;
+
+  const answer = input;
+  
+  return(
+    "Answer: " + answer
+  )
+}
+
+export default Day5Solution;
