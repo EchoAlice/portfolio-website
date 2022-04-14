@@ -1,45 +1,65 @@
-import Day1Solution from "./days/day1/Day1Script.js";
-import Day2Solution from "./days/day2/Day2Script.js";
-import Day3Solution from "./days/day3/Day3Script.js";
-import Day4Solution from "./days/day4/Day4Script.js";
+import React, { Suspense, useEffect, useState } from "react";
+import day1input from "./days/day1/input.txt";
+import day2input from "./days/day2/input.txt";
+import day3input from "./days/day3/input.txt";
+import day4input from "./days/day4/input.txt";
+import day1script from "./days/day1/day1script.txt";
+import day2script from "./days/day2/day2script.txt";
+import day3script from "./days/day3/day3script.txt";
+import day4script from "./days/day4/day4script.txt";
+import { CodeBlock, ocean } from "react-code-blocks";
 
-const solutions = [];
-solutions[1] = <Day1Solution />
-solutions[2] = <Day2Solution />
-solutions[3] = <Day3Solution />
-solutions[4] = <Day4Solution />
+const inputs = [
+  day1input,
+  day2input,
+  day3input,
+  day4input
+]
 
-// How do i get the day 1 component to show up on site?
+const scripts = [
+  day1script,
+  day2script,
+  day3script,
+  day4script
+]
 
-const SolutionView =(props) => {
+function loadAnswer(day) {
+  const Answer = React.lazy(() =>
+    import(`./days/day${day}/Day${day}Solution.js`)
+  );
+  return Answer;
+}
+
+const SolutionView = (props) => {
+  const [input, setInput] = useState("");
+  const [script, setScript] = useState("");
   const day = props.parameter;
-  const answer = solutions[day]
-  
+  const index = day - 1;
+  const Answer = loadAnswer(day);
+
+  useEffect(() => { 
+    fetch(inputs[index])
+      .then(r => r.text())
+      .then(input => setInput(input))
+    
+    fetch(scripts[index])
+      .then(r => r.text())
+      .then(script => setScript(script))
+      console.log(script)
+  })
+
   return(
     <>
-      { answer }
-    </> 
+      <Suspense fallback={<div>Loading...</div>}>
+        <CodeBlock
+          text={script}
+          language="javascript"
+          theme={ocean}
+        />
+        <Answer input={input}/>
+      </Suspense>
+    </>
   );
 }
 
 export default SolutionView;
-
-
-
-
-
-// import { CodeBlock, ocean } from "react-code-blocks";
-// const fs = require('fs');
-
-// // Use a loop that gets all .js files
-// let numberOfDays = 4;
-// const solutions = [];
-// const scripts = [];
-
-// for (let i = 1; i <= numberOfDays; i++) {
-//  solutions[i] = require("./AnswerScripts/day"+i+"/Day"+i+"Script.js");
-//   // Converts .js file to a string
-//   scripts[i] = fs.readFile(solutions[i]).toString()
-//   console.log(solutions[i]);
-//   console.log(scripts[i]); 
-// }
