@@ -25,7 +25,7 @@ const dropdownItems = (numberOfItems, setDay) => {
  * Pass in the 'day' parameter to the solutionView tag
  */
 const SolutionsView = () => {
-  const [day, setDay] = useState(1);
+  const [day, setDay] = useState("");
   
   return( 
     <>

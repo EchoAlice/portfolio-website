@@ -24,10 +24,12 @@ const scripts = [
 ]
 
 function loadAnswer(day) {
-  const Answer = React.lazy(() =>
-    import(`./days/day${day}/Day${day}Solution.js`)
-  );
+  if (day !== "") {
+    const Answer = React.lazy(() =>
+        import(`./days/day${day}/Day${day}Solution.js`)
+    );
   return Answer;
+  }
 }
 
 const SolutionView = (props) => {
