@@ -46,7 +46,9 @@ const createLine = (endPoints) => {
   const vertical_distance = Math.abs(y1 - y2); 
   const horizontal_distance = Math.abs(x1 - x2); 
   // const line_length = vertical_distance + horizontal_distance;
-  
+ 
+  // Site crashes when I run this function.  Inputs from other days are being run in this as well... What's going on? 
+
   // This feels extremely repetetive... 
   // Copy x coordinate and add/subtract from 
   // y depending on which y is first
