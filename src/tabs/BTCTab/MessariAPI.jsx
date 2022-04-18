@@ -8,6 +8,7 @@ const MessariAPI = (props) => {
   const [apiIsLoading, setApiIsLoading] = useState(true);
   const [price, setPrice] = useState("");
   const url = "https://data.messari.io/api/v1/assets/btc/metrics"; 
+  
   useEffect(() => {
     setApiIsLoading(true);
     fetch(url)

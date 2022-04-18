@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MessariAPI from './Messari/MessariAPI';
+import MessariAPI from './MessariAPI';
 
 /*
  * Displays BTC price and re-renders API when button is clicked
