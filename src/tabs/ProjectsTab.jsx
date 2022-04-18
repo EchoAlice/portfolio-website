@@ -1,4 +1,5 @@
 import React from 'react';
+import MessariAPI from './Messari/MessariAPI';
 
 const ProjectsTab = () => {
   return(    
