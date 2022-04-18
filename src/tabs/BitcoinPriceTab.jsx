@@ -1,7 +1,7 @@
 import React from 'react';
 import MessariAPI from './Messari/MessariAPI';
 
-const ProjectsTab = () => {
+const BitcoinPriceTab = () => {
   return(    
     <div>
       <MessariAPI/>
@@ -9,4 +9,4 @@ const ProjectsTab = () => {
   );
 }
 
-export default ProjectsTab;
+export default BitcoinPriceTab;
