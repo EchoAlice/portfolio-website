@@ -3,14 +3,15 @@
 
 const cleanLine = (inputLine) => {
   // Seperate line into the 4 numbers they consist of.
-  const numbers = inputLine.split(/(?:,| )+/);
-  for (let i = 0; i < numbers.length; i++){
+  var numbers = inputLine.split(/(?:,| )+/);
+  for (let i = 0; i < numbers.length; i++){ 
     if (numbers[i] === "->") {
       numbers.splice(i,1);
     }
-  // console.log(i + "th number: " + numbers[i])
   }
-  return numbers
+  numbers = numbers.map(Number);
+  
+  return numbers;
 }
 
 /* 
@@ -23,95 +24,105 @@ const checkLineDirection = (numbers) => {
   const y2 = numbers[3];
 
   if (x1 === x2 || y1 === y2) {
-    return true
+    return true;
   }
   else {
-    return false 
+    return false; 
   }
 }
 
 /*
  * We want to fill in points between the ends of coordinates
  */
-const createLine = (endPoints) => {
-  // endPoints is already an array!!!
-  console.log("End Points: " + endPoints[0]);
-   
-  const x1 = endPoints[0];
-  const y1 = endPoints[1];
-  const x2 = endPoints[2];
-  const y2 = endPoints[3];
-  const line = []; 
+const createLine = (endpoints) => {
+  const x1 = endpoints[0];
+  const y1 = endpoints[1];
+  const xEnd = endpoints[2];
+  const yEnd = endpoints[3];
+  
+  // Start line: 
+  const line = [[x1, y1]]; 
+  const vertical_distance = Math.abs(y1 - yEnd); 
+  const horizontal_distance = Math.abs(x1 - xEnd);
+  const line_length = vertical_distance + horizontal_distance;
+  const points_to_create = line_length - 1;
 
-  const vertical_distance = Math.abs(y1 - y2); 
-  const horizontal_distance = Math.abs(x1 - x2); 
-  // const line_length = vertical_distance + horizontal_distance;
- 
-  // Site crashes when I run this function.  Inputs from other days are being run in this as well... What's going on? 
-
-  // This feels extremely repetetive... 
-  // Copy x coordinate and add/subtract from 
-  // y depending on which y is first
-  if (horizontal_distance === 0) {
-    if (y1 > y2) {
-      for (let i = y2; y2 < y1; i++) {
-        line.push(x1, i);
+  // // Copy x coordinate and add/subtract from 
+  // // y depending on which y is first
+  if (horizontal_distance === 0 && points_to_create > 0) {
+    if (y1 > yEnd) {
+      for (let i = 1; i <= points_to_create; i++) {
+        const next_number = y1 - i;
+        const point = [x1, next_number];
+        line.push(point);
       }
     }
-    if (y1 < y2) {
-      for (let i = y1; y1 < y2; i++) {
-        line.push(x1, i);
+    if (y1 < yEnd) {
+      for (let i = 1; i <= points_to_create; i++) {
+        const next_number = y1 + i;
+        const point = [x1, next_number];
+        line.push(point);
       }
     }
   }
   // Copy y coordinate and add/subtract from 
   // x depending on which x is first
-  if (vertical_distance === 0) {
-    if (x1 > x2) {
-      for (let i = x2; x2 < x1; i++) {
-        line.push(i, y1);
+  if (vertical_distance === 0 && points_to_create > 0) {
+    if (x1 > xEnd) {
+      for (let i = 1; i <= points_to_create; i++) {
+        const next_number = x1 - i;
+        const point = [next_number, y1];
+        line.push(point);
       }
     }
-    if (x1 < x2){
-      for (let i = x1; x1 < x2; i++) {
-        line.push(i, y1);
+    if (x1 < xEnd){
+      for (let i = 1; i <= points_to_create; i++) {
+        const next_number = x1 + i;
+        const point = [next_number, y1];
+        line.push(point);
       }
     }
   }
-  console.log("Full Line: " + line);
+  line.push([xEnd,yEnd]);
+  return line;
 }
 
+/*
+ * How do I record when a point is used more than once?
+ * Why does my 3D array lose its structure when passed into a function?
+ */
+const addUpVentOverlap = (vents) => {
+  console.log("In function: " + vents);
+  
+  // This problem will be easier to solve if i get the vents object to keep its shape.
+  // AKA allow for points to hold shape
+  for (let i = 0; i < vents.length/2; i++) {
+
+  }
+}
 
 const Day5Solution = (props) => {
   // Turn input into lines
   const input = props.input;
   const lines = input.split("\r\n");
 
-  var horiz_or_vert = 0;
   const number_of_lines = lines.length;
-  // const vents = [];
+  const vents = [];
 
   for (let i = 0; i < number_of_lines; i++) {
-    console.log("\n")
-    console.log("Line Number: " + i);
-    console.log("Line to clean: " + lines[i]);
     const end_points = cleanLine(lines[i]);
     const direction = checkLineDirection(end_points);
-    // What calculation do i need to make when direction is h or v?
-    // console.log(`Line ${i} counts: ` + direction); 
     
     if (direction === true) {
       const points_of_line = createLine(end_points);
-      console.log(points_of_line); 
-      // How do we append points of a line to vents array?
-      
-      horiz_or_vert++;
+      vents.push(points_of_line);
     } 
   }
- 
-  // const pointsOverlap = addUpVentOverlap(pointsOfLine);
-  // const answer = pointsOverlap 
-  const answer = horiz_or_vert;
+  
+  // How do I record how often coordinates are used?
+  console.log(vents);
+  const points_overlap = addUpVentOverlap(vents);
+  const answer = points_overlap 
   return(
     "Answer: " + answer
   )

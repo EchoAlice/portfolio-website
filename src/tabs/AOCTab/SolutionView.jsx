@@ -28,7 +28,7 @@ const scripts = [
   day5script
 ]
 
- function loadAnswer(day) {
+function loadAnswer(day) {
   const Answer = React.lazy(() =>
     import("./days/day"+day+"/Day"+day+"Solution.js")
   );
@@ -37,20 +37,25 @@ const scripts = [
 
 const SolutionView = (props) => {
   const [input, setInput] = useState("");
+  const [inputIsLoading, setInputIsLoading] = useState(true); 
   const [script, setScript] = useState("");
   const day = props.parameter;
   const index = day - 1;
   const Answer = loadAnswer(day);
 
   useEffect(() => { 
+    setInputIsLoading(true); 
     fetch(inputs[index])
       .then(r => r.text())
-      .then(input => setInput(input))
-    
+      .then(input => {
+        setInput(input);
+        setInputIsLoading(false); 
+      });
+        
     fetch(scripts[index])
       .then(r => r.text())
       .then(script => setScript(script))
-  })
+  }, [index]);  
 
   // How do I use CodeBlock now that we have these new tags?
   return(
@@ -63,9 +68,11 @@ const SolutionView = (props) => {
             language="javascript"
             theme={ocean}
           />
-
-          {/* Displays answer */}
-          <Answer input={input}/>
+          {!inputIsLoading ? (
+            <Answer input={input}/>
+          ) : (
+            <div> Loading... </div>
+          )}
         </ErrorBoundary>
       </Suspense>
     </>
