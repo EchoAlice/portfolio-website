@@ -29,7 +29,7 @@ const MessariAPI = (props) => {
       .then(r => r.json())
       .then (response => {
         console.log(response);
-        setPrice(response.data.market_data.price_usd);
+        setPrice(parseFloat(response.data.market_data.price_usd).toFixed(2));
         setApiIsLoading(false);
       }).catch((error) => {
         console.error(error);

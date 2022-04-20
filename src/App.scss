@@ -1,3 +1,40 @@
-//How do I use the color scheme?
-
 @import 'colors';
+
+// Find more style attributes!
+// Go through every css element description
+// Go through CSS
+// Bootstrap tutorial
+
+.app{
+  width: 100%;
+  height: 100%;
+  background-color: $green;
+}
+
+.app > div {
+  background-color: $purple;
+  height: 700px;
+  width: 100%;  
+}
+
+button {
+  background-color: $yellow;
+  border-radius: 25%;
+}
+
+// Put something within the flex container! 
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  background-color: $purple;
+}
+
+.flex-container > div {
+  background-color: $red;
+  width: 45%;
+  margin: 20px;
+  text-align: center;
+  line-height: 35px;
+  padding: 20px;
+  font-size: 21px;
+}
