@@ -18,7 +18,6 @@ const checkLineDirection = (numbers) => {
   const y1 = numbers[1];
   const x2 = numbers[2];
   const y2 = numbers[3];
-
   if (x1 === x2 || y1 === y2) {
     return true;
   }
@@ -94,7 +93,7 @@ const compressPoints = (vents) => {
   return points;
 }
 
-const findLargestXandY = (points) => { 
+const calculateGraphDimensions = (points) => { 
   var largest_x = 0;
   var largest_y = 0;
   
@@ -107,8 +106,9 @@ const findLargestXandY = (points) => {
     }
   }
   // This should at top of function
-  var x_and_y = [largest_x, largest_y];
-  return x_and_y;
+  // Add 1 to largest x and y so graph can record all lines
+  var graph_dimensions = [largest_x + 1, largest_y + 1];
+  return graph_dimensions;
 } 
 
 /**
@@ -118,13 +118,13 @@ const findLargestXandY = (points) => {
  * (before i plot points onto it), the empty graph 
  * holds the values for plotted points. 
  */
-const createEmptyGraph = (_largest_x_and_y) => {
+const createEmptyGraph = (graph_dimensions) => {
   var empty_graph = [];
   var empty_row = []; 
-  const largest_x = _largest_x_and_y[0]; 
-  const largest_y = _largest_x_and_y[1];
-  for (let c = 0; c < largest_x; c++) {
-    for (let r = 0; r < largest_y; r++) {
+  const x_axis = graph_dimensions[0]; 
+  const y_axis = graph_dimensions[1];
+  for (let c = 0; c < x_axis; c++) {
+    for (let r = 0; r < y_axis; r++) {
       empty_row.push(0); 
     }
     const row_of_zeros = empty_row;
@@ -132,63 +132,47 @@ const createEmptyGraph = (_largest_x_and_y) => {
     // Resets array 
     empty_row = [];
   } 
-  console.log("create_empty_graph"); 
-  console.log(empty_graph); 
   return empty_graph;
 }
 
-const plotPoints = (empty_graph, vents, largest_x_and_y) => {
-  var graph = empty_graph; 
-  // console.log(point_to_map); 
-  const largest_x = largest_x_and_y[0];
-  const largest_y = largest_x_and_y[1];
-  for (let i = 0; i < largest_x; i++) {
-    for (let j = 0; j < largest_y; j++) {
-      if (i === 3 && j === 3) {
-        console.log("3,3");
-        console.log(`i: ${i}`);
-        console.log(`j: ${j}`);
-        graph[i][j] += 1; 
-        console.log(graph[i][j]); 
+const plotPoints = (empty_graph, vents, graph_dimensions) => {
+  var graph = empty_graph;
+  var points_overlapping = 0;
+  // cycles through the points of each vent
+  for (let i = 0; i < vents.length; i++) {
+    for (let j = 0; j < vents[i].length; j++) { 
+      // Map point being checked
+      // Do i need a return value for this function?
+      if (checksPointOverlap(graph_dimensions, graph, vents[i][j]) === true) {
+        points_overlapping += 1;
       } 
     }
-  } 
-  // // cycles through the points of each vent
-  // for (let i = 0; i < vents.length; i++) {
-  //   for (let j = 0; j < vents[i].length; j++) {
-  //     // Map point being checked
-  //     // Do i need a return value for this function?
-  //     mapPointToGraph(largest_x_and_y, graph, vents[i][j]); 
-  //   }
-  // }
-
-  return graph; 
+  }
+  return points_overlapping; 
 }
 
-// const mapPointToGraph = (largest_x_and_y, graph, point_to_map) => {
-//   console.log(point_to_map); 
-//   const largest_x = largest_x_and_y[0];
-//   const largest_y = largest_x_and_y[1];
-//   for (let i = 0; i < largest_x; i++) {
-//     for (let j = 0; j < largest_y; j++) {
-//       console.log(graph[i][j]);
-//       if (i === 3 && j === 3) {
-//         console.log("3,3");
-//         // graph[i][j]
-//       } 
-//     }
-//   } 
-  // }      
-      // Logic for updating the graph
-      // if (point_to_map[0] === j && point_to_map[1] === i) {
-      //   graph[i][j] += 1;
-      //   // if (graph[i][j] > 1) {
-      //   //   // Do something
-      //   // }
-      
-
-  // return updatedGraph;
-
+/**
+ * Maps point to graph.
+ * Calculates if point overlaps with another
+ */
+const checksPointOverlap = (graph_dimensions, graph, point_to_map) => {
+  const x_axis = graph_dimensions[0];
+  const y_axis = graph_dimensions[1];
+  // Logic for updating the graph  
+  for (let i = 0; i < x_axis; i++) {
+    for (let j = 0; j < y_axis; j++) {
+      if (point_to_map[0] === j && point_to_map[1] === i) {
+        graph[i][j] += 1;
+        if (graph[i][j] > 1) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      }
+    }
+  }
+} 
 
 const Day5Solution = (props) => {
   // Turn input into lines
@@ -210,18 +194,12 @@ const Day5Solution = (props) => {
     } 
   }
 
-  // Turns array of lines with points, 
-  // into an array of all points that 
+  // Turns array of lines with points, into an array of all points 
   points = compressPoints(vents);
-  const largest_x_and_y = findLargestXandY(points);
-  const empty_graph = createEmptyGraph(largest_x_and_y);
+  const graph_dimensions = calculateGraphDimensions(points);
+  const empty_graph = createEmptyGraph(graph_dimensions);
   // Maybe i shouldn't compress vents.. oops
-  const final_graph = plotPoints(empty_graph, vents, largest_x_and_y);
-  console.log("final_graph: "); 
-  console.log(final_graph); 
-  // const points_overlap = addUpVentOverlap(vents);
-  // const answer = points_overlap; 
-  const answer = "Dummy answer"; 
+  const answer = plotPoints(empty_graph, vents, graph_dimensions);
   return(
     "Answer: " + answer
   )
