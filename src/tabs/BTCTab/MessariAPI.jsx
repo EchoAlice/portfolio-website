@@ -2,6 +2,18 @@ import React, { useEffect, useState } from 'react';
 
 const url = "https://data.messari.io/api/v1/assets/btc/metrics"; 
 
+const getBitcoinStats = (apiIsLoading, apiFailedToLoad, price) => {
+  if (!apiIsLoading && !apiFailedToLoad && price !== "") {
+    return <div>{price}</div>;
+  }
+  else if (apiIsLoading && !apiFailedToLoad) {
+    return <div> Loading... </div>; 
+  }
+  else {
+    return <div> Failed to load</div>; 
+  }
+}
+
 /*
  * Pulls data from Messari's API and displays it on website
  */
@@ -18,28 +30,16 @@ const MessariAPI = (props) => {
       .then (response => {
         console.log(response);
         setPrice(response.data.market_data.price_usd);
-        price === "" || price === undefined ? (
-        setApiFailedToLoad(true) 
-        ) : ( 
-          setApiFailedToLoad(false)
-        );
         setApiIsLoading(false);
       }).catch((error) => {
         console.error(error);
         setApiFailedToLoad(true);
       });
-
-  }, [count, price]);
+  }, [count]);
 
   return(    
     <>
-      {!apiIsLoading && !apiFailedToLoad && price !== "" ? (
-        <div>{price}</div>
-      ) : apiIsLoading && !apiFailedToLoad ? (
-        <div> Loading... </div> 
-      ) : ( 
-       <div> Failed to load</div> 
-      )}
+      { getBitcoinStats(apiIsLoading, apiFailedToLoad, price) }
     </>
   );
 }
