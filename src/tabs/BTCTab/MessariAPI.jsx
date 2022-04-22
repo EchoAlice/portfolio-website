@@ -24,7 +24,11 @@ const MessariAPI = (props) => {
           setApiFailedToLoad(false)
         );
         setApiIsLoading(false);
-      })
+      }).catch((error) => {
+        console.error(error);
+        setApiFailedToLoad(true);
+      });
+
   }, [count, price]);
 
   return(    
