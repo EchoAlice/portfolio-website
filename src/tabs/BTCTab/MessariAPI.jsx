@@ -4,7 +4,7 @@ const url = "https://data.messari.io/api/v1/assets/btc/metrics";
 
 const getBitcoinStats = (apiIsLoading, apiFailedToLoad, price) => {
   if (!apiIsLoading && !apiFailedToLoad && price !== "") {
-    return <div>{price}</div>;
+    return <div>BTC Price USD: {price}</div>;
   }
   else if (apiIsLoading && !apiFailedToLoad) {
     return <div> Loading... </div>; 
@@ -29,7 +29,7 @@ const MessariAPI = (props) => {
       .then(r => r.json())
       .then (response => {
         console.log(response);
-        setPrice(response.data.market_data.price_usd);
+        setPrice(parseFloat(response.data.market_data.price_usd).toFixed(2));
         setApiIsLoading(false);
       }).catch((error) => {
         console.error(error);

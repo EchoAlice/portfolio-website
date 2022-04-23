@@ -1,3 +1,47 @@
-//How do I use the color scheme?
-
 @import 'colors';
+
+// Find more style attributes!
+// Go through every css element description
+// Go through CSS
+// Bootstrap tutorial
+
+.app{
+  width: 100%;
+  height: 100%;
+  background-color: $green;
+}
+
+.app > div {
+  background-color: $purple;
+  height: 700px;
+  width: 100%;  
+}
+
+button {
+  background-color: $yellow;
+  border-radius: 25%;
+}
+
+// .home-background{
+//   background-image: url(https://m.media-amazon.com/images/I/81p60kxRyKL._AC_UY218_.jpg);
+//   // How do I get picture to fill background?
+//   // How do i make opacity only happen on background?
+  
+//   // opacity: 0.5;
+// }
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  background-color: $purple;
+}
+
+.flex-container > div {
+  background-color: $red;
+  width: 45%;
+  margin: 20px;
+  text-align: center;
+  line-height: 35px;
+  padding: 20px;
+  font-size: 21px;
+}

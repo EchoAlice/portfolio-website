@@ -3,7 +3,7 @@ import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import ContactTab from './tabs/ContactTab';
 import HomeTab from './tabs/HomeTab';
-import ProfileTab from './tabs/ProfileTab';
+// import ProfileTab from './tabs/ProfileTab';
 import BitcoinPriceTab from './tabs/BTCTab/BitcoinPriceTab';
 import AdventOfCodeTab from './tabs/AOCTab/AdventOfCodeTab';
 
@@ -20,9 +20,9 @@ const CreateTabs = () => {
       <Tab eventKey="home" title="Home">
         <HomeTab />
       </Tab>
-      <Tab eventKey="profile" title="Profile">
+      {/* <Tab eventKey="profile" title="Profile">
         <ProfileTab />
-      </Tab>
+      </Tab> */}
       <Tab eventKey="bitcoinprice" title="Bitcoin Price">
         <BitcoinPriceTab />
       </Tab>

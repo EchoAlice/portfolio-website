@@ -3,9 +3,11 @@ import CreateTabs from "./CreateTabs.jsx"
 
 const App = () => {
   return (
-    <div className="App">
-      <CreateTabs />
-    </div>
+    <>
+      <div className="app">
+        <CreateTabs />
+      </div>
+    </>  
   );
 }
 

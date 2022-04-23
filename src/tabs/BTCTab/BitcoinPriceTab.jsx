@@ -8,8 +8,9 @@ const BitcoinPriceTab = () => {
   const [count, setCount] = useState(0);
   return(    
     <>
-      <div>BTC Price USD: </div>
-      <MessariAPI count={ count }/>
+      <div class="flex-container">
+        <MessariAPI count={ count }/>
+      </div>
       <button onClick={() => setCount(count + 1)}>
         Update BTC Price
       </button>
