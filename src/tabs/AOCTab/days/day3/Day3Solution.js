@@ -62,7 +62,6 @@ const Day3Solution = (props) => {
       return 1;
     }
   }
-  
   const scrubberBitCriteria = (zero_bits, one_bits) => {
     if (zero_bits > one_bits) {
       scrubber_bit_criteria = 1;
