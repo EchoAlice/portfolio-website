@@ -4,7 +4,7 @@ const url = "https://data.messari.io/api/v1/assets/btc/metrics";
 
 const getBitcoinStats = (apiIsLoading, apiFailedToLoad, price) => {
   if (!apiIsLoading && !apiFailedToLoad && price !== "") {
-    return <div>{price}</div>;
+    return <div>BTC Price USD: {price}</div>;
   }
   else if (apiIsLoading && !apiFailedToLoad) {
     return <div> Loading... </div>; 
