@@ -45,7 +45,6 @@ const SolutionView = (props) => {
     fetch(scripts[index])
       .then(r => r.text())
       .then(script => setScript(script))
-      console.log(script)
   })
 
   return(
