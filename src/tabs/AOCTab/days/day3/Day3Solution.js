@@ -101,7 +101,7 @@ const Day3Solution = (props) => {
       let number_in_question = binary_input[r]; 
       if (bit_in_question === generator_bit_criteria) {
         // binary_input.splice(number_in_question, 1);
-        binary_survivors.add(number_in_question);
+        binary_survivors.push(number_in_question);
       } 
     }
   // }

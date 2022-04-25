@@ -32,20 +32,25 @@ function loadAnswer(day) {
 
 const SolutionView = (props) => {
   const [input, setInput] = useState("");
+  const [inputIsLoading, setInputIsLoading] = useState(true); 
   const [script, setScript] = useState("");
   const day = props.parameter;
   const index = day - 1;
   const Answer = loadAnswer(day);
 
   useEffect(() => { 
+    setInputIsLoading(true); 
     fetch(inputs[index])
       .then(r => r.text())
-      .then(input => setInput(input))
+      .then(input => {
+        setInput(input);
+        setInputIsLoading(false);
+      });
     
     fetch(scripts[index])
       .then(r => r.text())
       .then(script => setScript(script))
-  })
+  }, [index]);
 
   return(
     <>
@@ -55,7 +60,11 @@ const SolutionView = (props) => {
           language="javascript"
           theme={ocean}
         />
-        <Answer input={input}/>
+        {!inputIsLoading ? (
+          <Answer input={input}/>
+        ) : (
+          <div> Loading... </div>
+        )}
       </Suspense>
     </>
   );
