@@ -49,49 +49,64 @@ const Day3Solution = (props) => {
   let one_bits = 0;  
   let generator_bit_criteria = 0;
   let scrubber_bit_criteria = 0;
-
+  let row_p2 = binary_input.length;
+  // let column_p2 = binary_input[0].length; 
+  let binary_survivors = [];
   console.log("\n");
+  console.log(binary_input);
+  console.log(binary_input.length);
   
   const generatorBitCriteria = (zero_bits, one_bits) => {
     if (zero_bits > one_bits) {
       generator_bit_criteria = 0;
-      return 0;
+      return "0";
     }
     if (zero_bits <= one_bits) {
       generator_bit_criteria = 1;
-      return 1;
+      return "1";
     }
   }
   const scrubberBitCriteria = (zero_bits, one_bits) => {
     if (zero_bits > one_bits) {
       scrubber_bit_criteria = 1;
-      return 1;
+      return "1";
     }
     if (zero_bits <= one_bits) {
       scrubber_bit_criteria = 0;
-      return 0;
+      return "0";
     }
   }
-
-  // Records the number of types of bits within a column
-  // Put this inside larger for loop
-  for (let h = 0; h < height; h++) {
-    console.log(`Bit: ${binary_input[h][0]}`);
-    if (binary_input[h][0] === '0') {
-      zero_bits += 1;
+  // Accesses each element in binary input 
+  // Put everything in an outside for loop of 2 so you can calculate
+  // the answer based off of gen and scrub using same logic 
+  // for (let c = 0; c < column_p2; c++) { 
+    // Records the number of types of bits within a column
+    for (let r = 0; r < row_p2; r++) {
+      let bit_in_question = binary_input[r][0];  
+      if (bit_in_question === '0') {
+        zero_bits += 1;
+      }
+      else {
+        one_bits += 1;
+      }
+    } 
+    // Gen and scrub functions work!
+    generator_bit_criteria = generatorBitCriteria(zero_bits, one_bits); 
+    scrubber_bit_criteria = scrubberBitCriteria(zero_bits, one_bits); 
+    console.log(scrubber_bit_criteria);
+    // Compares bit in question to criteria and deletes number from array  
+    for (let r = 0; r < row_p2; r++) {
+      console.log(binary_input[r][0]); 
+      let bit_in_question = binary_input[r][0]; 
+      let number_in_question = binary_input[r]; 
+      if (bit_in_question === generator_bit_criteria) {
+        // binary_input.splice(number_in_question, 1);
+        binary_survivors.add(number_in_question);
+      } 
     }
-    else {
-      one_bits += 1;
-    }
-  } 
-  // Gen and scrub functions work!
-  generator_bit_criteria = generatorBitCriteria(zero_bits, one_bits); 
-  scrubber_bit_criteria = scrubberBitCriteria(zero_bits, one_bits); 
+  // }
+  console.log(`Survivors: ${binary_input}`);
 
-  console.log("Generator bit criteria: " + generator_bit_criteria);
-  console.log("Scrubber bit criteria: " + scrubber_bit_criteria);
-  console.log(`0 bits: ${zero_bits}`);
-  console.log(`1 bits: ${one_bits}`);
 
   // binary_input works, but are all strings!
   const life_support_rating = generator * scrubber;  
