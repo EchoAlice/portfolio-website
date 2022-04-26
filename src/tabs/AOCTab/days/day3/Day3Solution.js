@@ -43,76 +43,83 @@ const Day3Solution = (props) => {
  /********************************************************
                         Part 2 
  ********************************************************/ 
-  let generator = 0;
-  let scrubber = 0;
-  let generator_bit_criteria = 0;
-  // let scrubber_bit_criteria = 0;
+  let bit_criteria = 0;
   var row_p2 = binary_input.length;
   let column_p2 = binary_input[0].length;
-  // I'll have to make a copy of the input array if I'm finding both O2 and Co2 values 
-  console.log("\n");
+  let binary_input_copy = [];
+  let answer = [];
   
   const generatorBitCriteria = (zero_bits, one_bits) => {
     if (zero_bits > one_bits) {
-      generator_bit_criteria = 0;
+      bit_criteria = 0;
       return "0";
     }
     if (zero_bits <= one_bits) {
-      generator_bit_criteria = 1;
+      bit_criteria = 1;
       return "1";
     }
   }
-  // const scrubberBitCriteria = (zero_bits, one_bits) => {
-  //   if (zero_bits > one_bits) {
-  //     scrubber_bit_criteria = 1;
-  //     return "1";
-  //   }
-  //   if (zero_bits <= one_bits) {
-  //     scrubber_bit_criteria = 0;
-  //     return "0";
-  //   }
-  // }
+  const scrubberBitCriteria = (zero_bits, one_bits) => {
+    if (zero_bits > one_bits) {
+      bit_criteria = 1;
+      return "1";
+    }
+    if (zero_bits <= one_bits) {
+      bit_criteria = 0;
+      return "0";
+    }
+  }
   const winningNumber = (final_string) => {
     let winner = parseInt(final_string, 2);
     return winner;
   }
-  // Accesses each element in binary input 
-  for (let c = 0; c < column_p2; c++) { 
-    // Records the number of types of bits within a column
-    let zero_bits = 0;
-    let one_bits = 0;  
-    for (let r = 0; r < row_p2; r++) {
-      let bit_in_question = binary_input[r][c];  
-      if (bit_in_question === '0') {
-        zero_bits += 1;
+  const createBinaryCopy = (binary_input) => {
+    for (let r = 0; r < binary_input.length; r++) {
+      binary_input_copy[r] = binary_input[r];
+    }
+    return binary_input_copy;
+  }
+  
+  // Cycles through each bit criteria and input array
+  for (let a = 0; a < 2; a++) { 
+    binary_input_copy = createBinaryCopy(binary_input); 
+    row_p2 = binary_input_copy.length; 
+    // Accesses each element in binary input 
+    for (let c = 0; c < column_p2; c++) { 
+      let zero_bits = 0;
+      let one_bits = 0;  
+      // Records the number of each type of bit within a column
+      for (let r = 0; r < row_p2; r++) {
+        let bit_in_question = binary_input_copy[r][c];  
+        if (bit_in_question === '0') {
+          zero_bits += 1;
+        }
+        else {
+          one_bits += 1;
+        }
+      }
+      // Generates bit criteria based on cycle 
+      if (a === 0){
+        bit_criteria = generatorBitCriteria(zero_bits, one_bits); 
       }
       else {
-        one_bits += 1;
+        bit_criteria = scrubberBitCriteria(zero_bits, one_bits); 
+      } 
+      // Compares each bit in question to criteria and deletes number from array   
+      for (let r = row_p2 - 1; r >= 0; r--) {
+        let bit_in_question = binary_input_copy[r][c]; 
+        if (bit_in_question !== bit_criteria && row_p2 > 1) {
+          binary_input_copy.splice(r, 1); 
+        }
       }
-    } 
-    generator_bit_criteria = generatorBitCriteria(zero_bits, one_bits); 
-    // scrubber_bit_criteria = scrubberBitCriteria(zero_bits, one_bits); 
-    console.log(`Generator bit criteria: ${generator_bit_criteria}`); 
-    // console.log(`Scrubber bit criteria: ${scrubber_bit_criteria}`); 
-
-    // Compares each bit in question to criteria and deletes number from array   
-    for (let r = row_p2 - 1; r >= 0; r--) {
-      let bit_in_question = binary_input[r][c]; 
-      if (bit_in_question !== generator_bit_criteria && row_p2 > 1) {
-        binary_input.splice(r, 1); 
+      row_p2 = binary_input_copy.length;
+      if (row_p2 === 1) {
+        answer[a] = winningNumber(binary_input_copy);
       }
-    }
-    console.log(`Survivors: ${binary_input}`);
-    // Reseting variables 
-    row_p2 = binary_input.length;
-    if (row_p2 === 1) {
-      console.log(`Strings remaining: ${row_p2}`);
-      generator = winningNumber(binary_input);
     }
   }
 
-  // binary_input works, but are all strings!
-  const life_support_rating = generator + scrubber;  
+  const life_support_rating = answer[0] * answer[1];  
   const part2_answer = life_support_rating; 
   return( 
     <>
@@ -127,21 +134,3 @@ const Day3Solution = (props) => {
 }
 
 export default Day3Solution
-
-// Loop isn't working.
-    // for (let r = row_p2 - 1; r >= 0; r--) {
-    //   console.log(`Row number: ${r}`); 
-    //   console.log(`Row length: ${row_p2}`); 
-    //   let bit_in_question = binary_input[r][0]; 
-    //   let number_in_question = binary_input[r]; 
-    //   if (bit_in_question !== generator_bit_criteria) {
-    //     console.log("You shall not pass"); 
-    //     console.log(`Number to delete: ${number_in_question}`); 
-    //     console.log(binary_input);
-    //     // why is splice not working 
-    //     binary_input.splice(number_in_question, 1);
-    //     // console.log(`Updated binary input: ${binary_input}`);
-    //     console.log(binary_input);
-    //     // Why does this not work?
-    //     // binary_input.splice(number_in_question, 1);
-    //   } 

@@ -1,7 +1,7 @@
 const Day3Solution = (props) => {
     // Parses file, separating string into individual values
   const input = props.input
-  const binary_input = input.split("\r\n");
+  var binary_input = input.split("\r\n");
 
   // Lengths of binary digits and array
   const width = binary_input[0].length; 
@@ -38,10 +38,86 @@ const Day3Solution = (props) => {
   const gamma = parseInt(binary_input_gamma, 2);
   const epsilon = parseInt(binary_input_epsilon, 2 );
 
-  const answer = gamma * epsilon;
-  return( 
-    "Answer: " + answer
-  )
-}
+  const part1_answer = gamma * epsilon;
+ 
+ /********************************************************
+                        Part 2 
+ ********************************************************/ 
+  let bit_criteria = 0;
+  var row_p2 = binary_input.length;
+  let column_p2 = binary_input[0].length;
+  let binary_input_copy = [];
+  let answer = [];
+  
+  const generatorBitCriteria = (zero_bits, one_bits) => {
+    if (zero_bits > one_bits) {
+      bit_criteria = 0;
+      return "0";
+    }
+    if (zero_bits <= one_bits) {
+      bit_criteria = 1;
+      return "1";
+    }
+  }
+  const scrubberBitCriteria = (zero_bits, one_bits) => {
+    if (zero_bits > one_bits) {
+      bit_criteria = 1;
+      return "1";
+    }
+    if (zero_bits <= one_bits) {
+      bit_criteria = 0;
+      return "0";
+    }
+  }
+  const winningNumber = (final_string) => {
+    let winner = parseInt(final_string, 2);
+    return winner;
+  }
+  const createBinaryCopy = (binary_input) => {
+    for (let r = 0; r < binary_input.length; r++) {
+      binary_input_copy[r] = binary_input[r];
+    }
+    return binary_input_copy;
+  }
+  
+  // Cycles through each bit criteria and input array
+  for (let a = 0; a < 2; a++) { 
+    binary_input_copy = createBinaryCopy(binary_input); 
+    row_p2 = binary_input_copy.length; 
+    // Accesses each element in binary input 
+    for (let c = 0; c < column_p2; c++) { 
+      let zero_bits = 0;
+      let one_bits = 0;  
+      // Records the number of each type of bit within a column
+      for (let r = 0; r < row_p2; r++) {
+        let bit_in_question = binary_input_copy[r][c];  
+        if (bit_in_question === '0') {
+          zero_bits += 1;
+        }
+        else {
+          one_bits += 1;
+        }
+      }
+      // Generates bit criteria based on cycle 
+      if (a === 0){
+        bit_criteria = generatorBitCriteria(zero_bits, one_bits); 
+      }
+      else {
+        bit_criteria = scrubberBitCriteria(zero_bits, one_bits); 
+      } 
+      // Compares each bit in question to criteria and deletes number from array   
+      for (let r = row_p2 - 1; r >= 0; r--) {
+        let bit_in_question = binary_input_copy[r][c]; 
+        if (bit_in_question !== bit_criteria && row_p2 > 1) {
+          binary_input_copy.splice(r, 1); 
+        }
+      }
+      row_p2 = binary_input_copy.length;
+      if (row_p2 === 1) {
+        answer[a] = winningNumber(binary_input_copy);
+      }
+    }
+  }
 
-export default Day3Solution
+  const life_support_rating = answer[0] * answer[1];  
+  const part2_answer = life_support_rating; 
